@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Listagem de Contatos</title>
+        <% include ../head %>
+    </head>
+    <body class="container">
+        <h2 class="basic-title text-center">Listagem de Contatos</h2>
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% 
+                    contatos.forEach((contato) => {
+                        %>
+                        <tr>
+                            <td><a href="/contatos/editar/<%=contato.id%>"><%= contato.nome %></a></td>
+                            <td><%= contato.email %></td>
+                            <td>
+                                <form action="/contatos/<%=contato.id%>?_method=DELETE" method="post">
+                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <%
+                        })
+                       %>
+                </tbody>
+            </table>
+        </div>
+        <a href="/contatos/novo">[Cadastrar Contato]</a>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Listagem de Pordutos</title>
+        <% include ../head %>
+    </head>
+    <body class="container">
+        <h2 class="basic-title text-center">Listagem de produtos</h2>
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% 
+                    produtos.forEach((produtos) => {
+                        %>
+                        <tr>
+                            <td><a href="/produtos/editar/<%=produtos.id%>"><%= produtos.nome %></a></td>
+                            <td><%= produtos.preco %></td>
+                            <td>
+                                <form action="/produtos/<%=produtos.id%>?_method=DELETE" method="post">
+                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <%
+                        })
+                       %>
+                </tbody>
+            </table>
+        </div>
+        <a href="/produtos/novo">[Cadastrar produtos]</a>
+    </body>
+</html>

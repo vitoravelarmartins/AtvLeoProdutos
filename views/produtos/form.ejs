@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cadastro de Produtos</title>
+        <% include ../head %>
+    </head>
+    <body>
+        <% if(locals.status){ %>
+            <p class="alert alert-info"><%=status%></p>
+        <%}%>
+        <div>
+            <div class ="container min-container">
+                <% if(!produtos.id) { %>
+                  <h2 class="basic-title">Novo Produto</h2>
+                <%} else { %>
+                  <h2 class="basic-title">Alterar Produto</h2>
+                <% } %>
+                <div class="errors">
+                   <%if(locals.erros){%>
+                    <ul style="list-style-type: none; padding: 0px;">
+                        <% erros.forEach((erro) => {%>
+                        <li class="alert alert-danger" style="padding: 0.5em;"><%= erro.msg %></li>
+                   <%})}%>
+                   </ul>
+                </div>
+                <% if(!produtos.id) { %>
+                <form action="/produtos" method="post" class="well" role="form">
+                <%} else { %>
+                <form action="/produtos/<%=produtos.id%>?_method=PUT" method="post" class="well" role="form">
+                <% } %>
+                    <div class="form-group">
+                        <label for="titulo">Produto</label>
+                        <div class="input-group">
+                            <input type="text" name="nome" placeholder="Nome do Produto" value="<%=produtos.nome%>" size="80"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="preco">Preço</label>
+                        <div class="input-group">
+                            <input type="text" name="preco" placeholder="Preço" value="<%=produtos.preco%>" size="80"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>    
